@@ -20,7 +20,7 @@ resource "aws_internet_gateway" "default" {
         }
 }
 output "internet_gateway_id" {
-  value = "${aws_internet_gateway.default.gateway_id}"
+  value = "${aws_internet_gateway.default.id}"
 }
 
 # DMZ subnets
