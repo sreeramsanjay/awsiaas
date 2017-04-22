@@ -30,13 +30,13 @@ resource "aws_route_table_association" "priv-subnet1" {
 }
 resource "aws_route_table_association" "priv-subnet2" {
   subnet_id = "${var.priv_subnet2_id}"
-  route_table_id = "${var.default_route_table_id}}"
+  route_table_id = "${var.default_route_table_id}"
 }
 resource "aws_route_table_association" "pub-agent-subnet1" {
   subnet_id = "${var.pub_subnet1_id}"
-  route_table_id = "${var.default_route_table_id}}"
+  route_table_id = "${var.default_route_table_id}"
 }
 resource "aws_route_table_association" "pub-agent-subnet2" {
   subnet_id = "${var.pub_subnet2_id}"
-  route_table_id = "${var.default_route_table_id}}"
+  route_table_id = "${var.default_route_table_id}"
 }
