@@ -1,0 +1,118 @@
+resource "aws_vpc" "default" {
+  cidr_block = "${var.vpc_cidr_block}"
+  enable_dns_hostnames = "true"
+  tags {
+        Name = "${var.project}-vpc"
+      }
+}
+
+output "vpc_id" {
+  value = "${aws_vpc.default.id}"
+}
+
+output "default_route_table_id" {
+  value = "${aws_vpc.default.main_route_table_id}"
+}
+
+resource "aws_internet_gateway" "default" {
+  vpc_id = "${aws_vpc.default.id}"
+  tags {
+         Name = "${var.project}-igw"
+        }
+}
+
+output "internet_gateway_id" {
+  value = "${aws_internet_gateway.default.gateway_id}"
+}
+
+# DMZ subnets
+resource "aws_subnet" "dmz-subnet1" {
+  vpc_id = "${aws_vpc.default.id}"
+  cidr_block = "${element(var.dmz_cidr, 0)}"
+  availability_zone = "${element(var.availability_zones, 0)}"
+  tags {
+          Name = "${var.project}-dmz-Subnet1"
+        }
+}
+
+output "dmz_subnet1_id" {
+  value = "${aws_subnet.dmz-subnet1.id}"
+}
+
+resource "aws_subnet" "dmz-subnet2" {
+  vpc_id = "${aws_vpc.default.id}"
+  cidr_block = "${element(var.dmz_cidr, 1)}"
+  availability_zone = "${element(var.availability_zones, 1)}"
+  tags {
+          Name = "${var.project}-dmz-Subnet2"
+        }
+}
+
+output "dmz_subnet2_id" {
+  value = "${aws_subnet.dmz-subnet2.id}"
+}
+####### iterator test#####
+resource "aws_subnet" "dmz-subnet-itr" {
+  count = 2
+  vpc_id = "${aws_vpc.default.id}"
+  cidr_block = "${element(var.dmz_cidr, count.index)}"
+  availability_zone = "${element(var.availability_zones, count.index)}"
+}
+
+
+##########################
+
+# Private Agent subnets
+resource "aws_subnet" "priv-subnet1" {
+  vpc_id = "${aws_vpc.default.id}"
+  cidr_block = "${element(var.priv_cidr, 0)}"
+  availability_zone = "${element(var.availability_zones, 0)}"
+  tags {
+         Name = "${var.project}-priv-az1"
+        }
+}
+
+output "priv_subnet1_id" {
+  value = "${aws_subnet.priv-subnet1.id}"
+}
+
+resource "aws_subnet" "priv-subnet2" {
+  vpc_id = "${aws_vpc.default.id}"
+  cidr_block = "${element(var.priv_cidr, 1)}"
+  availability_zone = "${element(var.availability_zones, 1)}"
+  tags {
+         Name = "${var.project}-priv-az1"
+        }
+}
+
+output "priv_subnet2_id" {
+  value = "${aws_subnet.priv-subnet2.id}"
+}
+
+#Public Agnet subnets
+resource "aws_subnet" "pub-agent-subnet1" {
+  vpc_id = "${aws_vpc.default.id}"
+  cidr_block = "${element(var.pub_cidr, 0)}"
+  availability_zone = "${element(var.availability_zones, 0)}"
+  tags {
+         Name = "${var.project}-pub-az1"
+        }
+}
+
+output "pub_subnet1_id" {
+  value = "${aws_subnet.pub-agent-subnet1.id}"
+}
+
+resource "aws_subnet" "pub-agent-subnet2" {
+  vpc_id = "${aws_vpc.default.id}"
+  cidr_block = "${element(var.pub_cidr, 1)}"
+  availability_zone = "${element(var.availability_zones, 1)}"
+  tags {
+         Name = "${var.project}-pub-az2"
+        }
+}
+
+output "pub_subnet2_id" {
+  value = "${aws_subnet.pub-agent-subnet2.id}"
+}
+
