@@ -12,6 +12,13 @@ module "vpc" {
   source = "../../modules/vpc"
   vpc_cidr_block = "${var.vpc_cidr}"
   project = "${var.project_tag}"
+  availability_zones = "${var.availability_zones}"
+  priv_cidr = "${var.priv_cidr}"
+  priv_count = "${var.priv_count}"
+  pub_count = "${var.pub_count}"+
+  dmz_count = "${var.dmz_count}"
+  pub_cidr = "${var.pub_cidr}"
+  dmz_cidr = "${var.dmz_cidr}"
 }
 module "s3_endpoint" {
   source = "../../modules/s3_endpoint"
