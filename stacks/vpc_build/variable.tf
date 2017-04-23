@@ -4,6 +4,15 @@ variable "region" {
 variable "availability_zones" {
   default = ["us-east-1c", "us-east-1d"]
 }
+variable "dmz_count" {
+  default = "2"
+}
+variable "priv_count" {
+  default = "2"
+}
+variable "pub_count" {
+  default = "2"
+}
 variable "vpc_cidr" {
   description = "CIDR for the whole VPC"
   default = "10.220.16.0/22"
