@@ -1,25 +1,24 @@
 resource "aws_iam_role" "cisco_iam_role" {
    name = "cisco_csr_iam_role"
    assume_role_policy = <<EOF
-   {
-     "Version": "2012-10-17",
-     "Statement": [
-       {
-         "Action": "sts:AssumeRole",
-         "Principal": {
-           "Service": "ec2.amazonaws.com"
-         },
-         "Effect": "Allow",
-         "Sid": ""
-       }
-     ]
-   }
-  EOF
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Principal": {
+        "Service": "ec2.amazonaws.com"
+      },
+      "Action": "sts:AssumeRole"
+    }
+  ]
+}  
+EOF
 }
 
 resource "aws_iam_instance_profile" "cisco_instance_profile" {
   name = "cisco_csr_instance_profile"
-  roles = ["cisco_csr_iam_role"]
+  roles = ["${aws_iam_role.cisco_iam_role.name}"]
 }
 
 resource "aws_iam_policy" "cisco_iam_policy" {
