@@ -30,5 +30,5 @@ variable "pub_cidr" {
   default = ["10.220.17.0/25", "10.220.19.0/25"]
 }
 variable "project_tag" {
-  default = "BuildFromGoCD"
+  default = "BuildromGoCD"
 }
