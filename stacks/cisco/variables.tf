@@ -8,7 +8,7 @@ variable "vpc_cidr" {
   default = "10.220.16.0/22"
 }
 variable "ssh_source_cidr_block" {
-  default = "1.1.1.3/32"
+  default = "1.1.1.4/32"
 }
 variable "availability_zones" {
   type = "list"
