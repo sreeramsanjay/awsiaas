@@ -5,6 +5,6 @@ variable "bgp_asn" {
 }
 variable "cg_peer_ip" {
   description = "customer peer ip"
-  default = "55.10.2.12"
+  default = "55.10.2.112"
 }
 
